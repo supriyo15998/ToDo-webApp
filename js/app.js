@@ -5,7 +5,7 @@ const itemList = document.querySelector('.item-list');
 const clearBtn = document.getElementById('clear-list');
 const feedback = document.querySelector('.feedback');
 let itemData = [];
-// form submission
+// form 
 itemForm.addEventListener('submit', function(event) {
 	event.preventDefault();
 	const textValue = itemInput.value;
@@ -15,19 +15,19 @@ itemForm.addEventListener('submit', function(event) {
 	}
 	else
 	{
-		//add item
+		//adding
 		addItem(textValue);
-		//clear the form
+		//clearing
 	itemInput.value = '';
-	//add to item array
+	
 	itemData.push(textValue);
-	//console.log(itemData);
+	
 	//local storage codes here later
-	// add event listeners to icons;
+	// addEventListeners to icons;
 	handleItem(textValue);
 	}
 });
-//show feedBack function
+//showFeedBack function
 function showFeedback(text,action){
 	feedback.classList.add('showItem',`alert=${action}`);
 	feedback.innerHTML = `<p>${text}</p>`
@@ -36,7 +36,7 @@ function showFeedback(text,action){
 	},3000);
 }
 
-// add item function
+// addItem function
 function addItem(value)
 {
 	const div = document.createElement('div');
@@ -53,25 +53,22 @@ function handleItem(textValue) {
 	const items = itemList.querySelectorAll('.item');
 	items.forEach(function(item){
 		if (item.querySelector(".item-name").textContent === textValue) {
-			//complete event listener
+			//line through event
 			item.querySelector('.complete-item').addEventListener('click', function(){
 				item.querySelector('.item-name').classList.toggle('completed');
 				this.classList.toggle('visiblility');
 			});
-		//edit event
+		//editing
 			item.querySelector('.edit-item').addEventListener('click', function(){
 				itemInput.value = textValue;
 				itemList.removeChild(item);
-				
 				itemData = itemData.filter(function(item) {
 					return item !== textValue;
 				});
-				
 			});
-			//delete event
+			//deleting
 			item.querySelector('.delete-item').addEventListener('click', function(){
 				itemList.removeChild(item);
-				
 				itemData = itemData.filter(function(item) {
 					return item !== textValue;
 				});

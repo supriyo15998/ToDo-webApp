@@ -6,8 +6,12 @@
   --mainBlue: #11b5e4;
 }
 body {
-  background: var(--mainWhite);
-  color: #333333;
+  background-image: url("../img/b.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: all;
+  min-height: 100vh;
 }
 .btn-green {
   border-color: var(--mainGreen);
