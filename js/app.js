@@ -4,7 +4,22 @@ const itemInput = document.getElementById('itemInput');
 const itemList = document.querySelector('.item-list');
 const clearBtn = document.getElementById('clear-list');
 const feedback = document.querySelector('.feedback');
-let itemData = [];
+let itemData = JSON.parse(localStorage.getItem('list')) || [];
+if (itemData.length>0) {
+	itemData.forEach(function(singleItem){
+		itemList.insertAdjacentHTML('beforeend', `
+		<div class = "item my-3">	
+		<h5 class="item-name text-capitalize">${singleItem}</h5>
+      <div class="item-icons">
+       <a href="#" class="complete-item mx-2 item-icon"><i class="far fa-check-circle"></i></a>
+       <a href="#" class="edit-item mx-2 item-icon"><i class="far fa-edit"></i></a>
+       <a href="#" class="delete-item item-icon"><i class="far fa-times-circle"></i></a>
+      </div>
+      </div>
+			`);
+		handleItem(singleItem);
+	});
+}
 // form 
 itemForm.addEventListener('submit', function(event) {
 	event.preventDefault();
@@ -23,6 +38,7 @@ itemForm.addEventListener('submit', function(event) {
 	itemData.push(textValue);
 	
 	//local storage codes here later
+	localStorage.setItem('list',JSON.stringify(itemData));
 	// addEventListeners to icons;
 	handleItem(textValue);
 	}
@@ -65,6 +81,7 @@ function handleItem(textValue) {
 				itemData = itemData.filter(function(item) {
 					return item !== textValue;
 				});
+				localStorage.setItem('list',JSON.stringify(itemData));
 			});
 			//deleting
 			item.querySelector('.delete-item').addEventListener('click', function(){
@@ -72,6 +89,7 @@ function handleItem(textValue) {
 				itemData = itemData.filter(function(item) {
 					return item !== textValue;
 				});
+				localStorage.setItem('list',JSON.stringify(itemData));
 				showFeedback('item deleted', 'success');
 			});
 		}
@@ -79,6 +97,7 @@ function handleItem(textValue) {
 }
 clearBtn.addEventListener('click', function(){
 	itemData = [];
+	localStorage.removeItem('list');
 	const items = itemList.querySelectorAll('.item');
 	if (items.length>0) {
 		items.forEach(function(item){
