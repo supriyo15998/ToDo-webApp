@@ -6,7 +6,7 @@
   --mainBlue: #11b5e4;
 }
 body {
-  background-image: url("../img/b.jpg");
+  background-image: url("../img/pic.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center;
@@ -63,7 +63,7 @@ body {
   opacity: 0.5;
 }
 .visibility {
-  opacity: 0.5;
+  opacity: 0.75;
 }
 .showItem {
   display: block;
